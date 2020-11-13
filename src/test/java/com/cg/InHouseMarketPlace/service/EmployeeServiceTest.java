@@ -60,20 +60,22 @@ class EmployeeServiceTest {
 			
 			assertEquals(emp1,employeeService.editEmployee(emp1));
 		}
+		@Test
 		public void testupdateIsAvailable() {
 			Proposal proposal1=new Proposal();
 			Proposal proposal2=new Proposal();
 			List<Proposal> proposalList=new ArrayList<Proposal>();
 			proposalList.add(proposal1);
 			proposalList.add(proposal2);
-			Offer offer=new Offer(2,true,LocalDate.now(),proposalList);
+			Offer offer3=new Offer(2,true,LocalDate.now(),proposalList);
 			
-			when(offerRepository.findByOfferId(offer.getOfferId())).thenReturn(offer);
+			when(offerRepository.findByOfferId(offer3.getOfferId())).thenReturn(offer3);
 			
-			assertNotNull(employeeService.updateIsAvailable(offer.getOfferId()));
+			assertNotNull(employeeService.updateIsAvailable(offer3.getOfferId()));
 			
-			assertEquals(offer, employeeService.updateIsAvailable(offer.getOfferId()));
+			assertEquals(offer3, employeeService.updateIsAvailable(offer3.getOfferId()));
 		}
+		@Test
 		public void testupdateIsFulfilled() {
 			Proposal proposal1=new Proposal();
 			Proposal proposal2=new Proposal();
@@ -86,25 +88,24 @@ class EmployeeServiceTest {
 			
 			assertNotNull(employeeService.updateIsFulfilled(requirement.getReqId()));
 			
-			assertEquals(requirement, employeeService.updateIsFulfilled(requirement.getReqId()));
-			
+			assertEquals(requirement, employeeService.updateIsFulfilled(requirement.getReqId()));			
 		}
-		
+		@Test
 		public void testupdateIsAccepted() {
 			
 			Resource resource=new Resource();
-			Proposal proposal1=new Proposal(123,"offer",2000.0,LocalDate.now(),false,LocalDate.now(),resource,emp1);		
-			when(proposalRepository.findByProposalId(proposal1.getPropId())).thenReturn(proposal1);
+			Proposal proposal3=new Proposal(123,"offer",2000.0,LocalDate.now(),true,LocalDate.now(),resource,emp1);		
+			when(proposalRepository.findByProposalId(proposal3.getPropId())).thenReturn(proposal3);
 			
-			assertNotNull(employeeService.updateIsAccepted(proposal1.getPropId()));
+			assertNotNull(employeeService.updateIsAccepted(proposal3.getPropId()));
 			
-			assertEquals(proposal1, employeeService.updateIsAccepted(proposal1.getPropId()));
-			
+			assertEquals(proposal3, employeeService.updateIsAccepted(proposal3.getPropId()));			
 		}
+		@Test
 		public void testgetAllOffers()
 		{
 			Resource resource1=new Resource();
-	         Resource resource2=new Resource();
+	        Resource resource2=new Resource();
 			Proposal proposal1=new Proposal(123,"offer",2000.0,LocalDate.now(),false,LocalDate.now(),resource1,emp1);
 		    Proposal proposal2=new Proposal(220,"offer",1000.0,LocalDate.now(),true,LocalDate.now(),resource2,emp2);
 		    List<Proposal> proposalList=new ArrayList<Proposal>();
@@ -120,10 +121,9 @@ class EmployeeServiceTest {
 			
 			assertNotNull(employeeService.getAllOffers(emp1.getEmpId()));
 			
-			assertEquals(offerList, employeeService.getAllOffers(emp1.getEmpId()));
-				
+			assertEquals(offerList, employeeService.getAllOffers(emp1.getEmpId()));				
 		}
-		
+		@Test
 		public void testgetAllRequirements()
 		{
 			Resource resource1=new Resource();
@@ -142,9 +142,6 @@ class EmployeeServiceTest {
 			
 			assertNotNull(employeeService.getAllRequirements(emp1.getEmpId()));
 			
-			assertEquals(requirementList, employeeService.getAllRequirements(emp1.getEmpId()));
-				
-		}
-		
-		
+			assertEquals(requirementList, employeeService.getAllRequirements(emp1.getEmpId()));				
+		}	
 	}
